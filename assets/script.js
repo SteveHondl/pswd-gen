@@ -1,8 +1,8 @@
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
+  // Assignment Code
+  var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
-function writePassword() {
+  // Write password to the #password input
+  function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
@@ -10,28 +10,33 @@ function writePassword() {
 
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+  // Add event listener to generate button
+  generateBtn.addEventListener("click", writePassword);
 
-// My code
-// password length restrictions
-//length is the parameter
+  //My code
+  //password length restrictions
+  //length is the parameter
   function validatePasswordLength(length) {
-    
-  return length >= 8 && length <= 128;
-}
-//variable is declared
-// user prompted to pick a length for their password
-  function generatePassword(){
+     return length >= 8 && length <= 128;
+  }
 
+  //function is created with the parameter being characters
+  //Math.random will select a random decimal between 0 and 1
+  //the decimal is then multiplied by the total number of characters in the string
+  //Math.floor will round that number to nearest whole number
+  function randomChars(characters) {
+   return characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+
+  function generatePassword(){
+  
+  //user prompted to selected number of characters
   var passwordLength = prompt("Number of characters?");
 
   //user required to pick a number of characters within the set parameter
   //loop will continue until user is the in parameter
   while (!validatePasswordLength(passwordLength)) {
-
-    passwordLength = prompt("Invalid number of characters");
-
+  passwordLength = prompt("Invalid number of characters");
   }
 
   //variables declared
@@ -41,51 +46,45 @@ generateBtn.addEventListener("click", writePassword);
   var includeNumeric = confirm("Include numbers?");
   var includeSpecial = confirm("Include special characters?");
 
-  //if none of the four variables are selected, the user will be alerted they must select at least one
+  //if none of the four variables are selected, the user will be alerted they must select at least one criteria
   if (!includeLowercase && !includeUppercase && !includeNumeric &&
       !includeSpecial) {
         alert("At least one criteria must be selected")
       }
 
-  // end of user input section
+  //end of user input
 
-  //character choices
+  //variables declared with appropriate characters for each criteria
   var lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
   var uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var numericChars = "0123456789";
   var specialChars = "!@#$%^&*()-_=+[]{}|;:\,.<>/?";
 
-  //variable password is created and initialized with an empty string
+  //variables created and initialized with an empty string
   var password = "";
+  
+  //variables are empty but ready to collect characters
+  var characterTypes = "";
+  
+  //depending on previous user inputs, characters will be selected from at least one of the four criteria
+  if (includeLowercase) characterTypes = characterTypes + lowercaseChars;
+  if (includeUppercase) characterTypes = characterTypes + uppercaseChars;
+  if (includeNumeric) characterTypes = characterTypes + numericChars;
+  if (includeSpecial) characterTypes = characterTypes + specialChars;
 
-  //function declared with characters being the parameter
-  //
-  function randomChars(characters) {
-    return characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  
-  //this loop will take the length of characters the user has input,
-  //it will select random characters from the variables the user has chosen.
-  
+  //Loop to generate the password, passwordLength will determine the number of loops
   for (var i = 0; i < passwordLength; i++) {
-    if (includeLowercase) {
-      password = password + randomChars(lowercaseChars);
-    }
-    if (includeUppercase) {
-      password = password + randomChars(uppercaseChars);
-    }
-    if (includeNumeric) {
-      password = password + randomChars(numericChars);
-    }
-    if (includeSpecial) {
-      password = password + randomChars(specialChars);
-    }
+  //function randomChars will now help to randomly pick characters based what the user has selected
+  var randomCharacters = randomChars(characterTypes);
+
+  // Add the randomly selected character to the password
+  password = password + randomCharacters;
   }
 
-    //Displays password on the GUI 
-    return password;
+  return password
 
   }
+
 
 
 
