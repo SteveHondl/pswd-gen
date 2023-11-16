@@ -52,7 +52,7 @@
         alert("At least one criteria must be selected")
       }
 
-  //end of user input
+  //end of user inputs
 
   //variables declared with appropriate characters for each criteria
   var lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
@@ -63,7 +63,6 @@
   //variables created and initialized with an empty string
   var password = "";
   
-  //variables are empty but ready to collect characters
   var characterTypes = "";
   
   //depending on previous user inputs, characters will be selected from at least one of the four criteria
@@ -80,7 +79,7 @@
   // Add the randomly selected character to the password
   password = password + randomCharacters;
   }
-
+  //password generated 
   return password
 
   }
